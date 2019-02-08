@@ -1,0 +1,14 @@
+dist: xenial
+services: docker
+language: minimal
+script:
+- docker build -t bit2shift/r3v-toolchain-clang .
+- docker save bit2shift/r3v-toolchain-clang | xz -9e > r3v-toolchain-clang.txz
+deploy:
+ provider: releases
+ api_key:
+  secure: "L9Y/jG0PJ98N4kBNokWoaplZa8u6CVuxZI8bsgzmxKRGS4HB7jxDKo9ZwaKp73OwXekzmNPPNEXXnrhoaoz9iJf8ue1xqjtn4BZrBrUQK+SipmbKw241Fb0KeoGszTMKpNpK6Q7i0bWYJFxLNrfDSFbBXS58gtwywwJF+u3zF7W2uiILuBC9FMF0opGOCYAumF1i2nIvvO4w4KaEmQcmhZn+MJFX504pmsTXXQ3qZnDr6p35BsX8TlBoKK71opf9ezh8ZbROW9bEIGWf66Vq0Oac7x/gtH+jXmgRlQjfaYo/5xDzp8xQpr2XbioTqfLblSpyOss55zO1O66lUSHD1H5AC6pv3r9KbO32xLwmIhsyhJNxBQbiExKHikfoU1jESUPljT07gpEaDaPcFTWKZ91z83+gM2dZSM+ELaist0o9eLzxFXx0PaWJPjXguAH98rLS8H305+vSmap1G4+S9BdLdV3K5XHXILa18juF2aAhFL7iTUQoM354tKOMLcbMllVi/1qaN8F/bNGA5p4cdFlbNvAdi6H7QLqSpZxcFgVEfcpzR0/eTRU0I5h9ir0q/aCQjRN1kNeJnEltr8kp2yKiVGhXrsR/ykpUVP1P2YeaLF/l/DS3R9gNjwiWCru6TFg3kQCgcBMqGzKcE23akf+uZXSKxGy1ChS9mFz3Gwk="
+ file: r3v-toolchain-clang.txz
+ skip_cleanup: true
+ on:
+  tags: true
