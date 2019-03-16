@@ -2,8 +2,8 @@ dist: xenial
 services: docker
 language: minimal
 script:
-- docker build -t bit2shift/r3v-toolchain-clang .
-- docker save bit2shift/r3v-toolchain-clang | xz -9ev > r3v-toolchain-clang.txz
+- docker build -t r3v-toolchain-clang .
+- docker save r3v-toolchain-clang | xz -9ev > r3v-toolchain-clang.txz
 deploy:
  provider: releases
  api_key:
